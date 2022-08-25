@@ -1,7 +1,7 @@
 version: "2.1"
 
 services:
-  db:
+  pma:
     image: phpmyadmin:${PMA_VERSION}
     container_name: "${APP_ALIAS}_pma"
     user: "${UID}:${GID}"
