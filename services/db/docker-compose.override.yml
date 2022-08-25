@@ -1,0 +1,30 @@
+version: "2.1"
+
+services:
+  db:
+    image: mysql:${MYSQL_VERSION}
+    container_name: "${APP_ALIAS}_db"
+    user: "${UID}:${GID}"
+    env_file:
+      - ../../.env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    labels:
+      - 'maintainer=${APP_MAINTAINER}'
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=${APP_NETWORK}'
+      - "traefik.http.routers.${APP_ALIAS}_db.service=${APP_ALIAS}_db_service"
+      - 'traefik.http.services.${APP_ALIAS}_db_service.loadbalancer.server.port=3306'
+    profiles:
+      - dev
+      - prod
+    networks:
+      private:
+        aliases:
+          - ${APP_NETWORK}
+    restart: unless-stopped
+    volumes:
+      - ${APP_ALIAS}_db_data:/var/lib/mysql

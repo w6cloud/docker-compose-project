@@ -1,0 +1,27 @@
+{
+  "name": "@web6/docker-compose-project",
+  "version": "1.0.0",
+  "description": "Default docker compose based project structure",
+  "main": "src/index.php",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w6cloud/docker-compose-project.git"
+  },
+  "authors": [
+    {
+      "name": "WEB6 Cloud",
+      "email": "support@web6.cloud"
+    }
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/w6cloud/docker-compose-project/issues"
+  },
+  "homepage": "https://github.com/w6cloud/docker-compose-project#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "husky": "^8.0.1"
+  }
+}

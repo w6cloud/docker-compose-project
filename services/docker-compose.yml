@@ -1,0 +1,32 @@
+version: '2.1'
+
+networks:
+  proxy:
+    name: proxy
+    external: true
+  private:
+    name: ${APP_NETWORK}
+    internal: true
+
+volumes:
+  db_data:
+    name: ${APP_ALIAS}_db_data
+    external: false
+
+services:
+  db:
+    extends:
+      file: db/docker-compose.override.yml
+      service: db
+  pma:
+    extends:
+      file: pma/docker-compose.override.yml
+      service: pma
+    depends_on:
+      - db
+  php:
+    extends:
+      file: php/docker-compose.override.yml
+      service: php
+    depends_on:
+      - db

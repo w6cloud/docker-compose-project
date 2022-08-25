@@ -1,0 +1,38 @@
+version: "2.1"
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+        APP_MAINTAINER: ${APP_MAINTAINER}
+        APP_TIMEZONE: ${APP_TIMEZONE}
+        APP_LOCALE: ${APP_LOCALE}
+    container_name: "${APP_ALIAS}_php"
+    user: "${UID}:${GID}"
+    env_file:
+      - ../../.env
+    environment:
+      - TZ=${APP_TIMEZONE}
+    labels:
+      - 'maintainer=${APP_MAINTAINER}'
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=proxy'
+      - 'traefik.http.routers.${APP_ALIAS}_php.entrypoints=websecure'
+      - 'traefik.http.routers.${APP_ALIAS}_php.rule=Host(`${APP_HOSTNAME}`)'
+      - "traefik.http.routers.${APP_ALIAS}_php.service=${APP_ALIAS}_php_service"
+      - 'traefik.http.services.${APP_ALIAS}_php_service.loadbalancer.server.port=80'
+    profiles:
+      - dev
+      - prod
+    networks:
+      proxy:
+      private:
+        aliases:
+          - ${APP_NETWORK}
+    restart: unless-stopped
+    volumes:
+      - ../../src:/var/www/html
+    working_dir: /var/www/html

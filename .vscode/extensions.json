@@ -1,0 +1,24 @@
+{
+    "recommendations": [
+        "gruntfuggly.align-mode",
+        "ms-azuretools.vscode-docker",
+        "mikestead.dotenv",
+        "editorconfig.editorconfig",
+        "usernamehw.errorlens",
+        "shinotatwu-ds.file-tree-generator",
+        "tombonnike.vscode-status-bar-format-toggle",
+        "michelemelluso.gitignore",
+        "eamodio.gitlens",
+        "spywhere.guides",
+        "oderwat.indent-rainbow",
+        "fnando.linter",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "pkief.material-icon-theme",
+        "ibm.output-colorizer",
+        "rvest.vs-code-prettier-eslint",
+        "sonarsource.sonarlint-vscode",
+        "tyriar.sort-lines",
+        "vivaxy.vscode-conventional-commits"
+    ]
+}

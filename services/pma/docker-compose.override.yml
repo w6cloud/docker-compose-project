@@ -1,0 +1,30 @@
+version: "2.1"
+
+services:
+  db:
+    image: phpmyadmin:${PMA_VERSION}
+    container_name: "${APP_ALIAS}_pma"
+    user: "${UID}:${GID}"
+    env_file:
+      - ../../.env
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+    labels:
+      - 'maintainer=${APP_MAINTAINER}'
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=proxy'
+      - 'traefik.http.routers.${APP_ALIAS}_pma.entrypoints=websecure'
+      - 'traefik.http.routers.${APP_ALIAS}_pma.rule=Host(`${APP_HOSTNAME}`) && PathPrefix(`/phpmyadmin`)"'
+      - "traefik.http.routers.${APP_ALIAS}_pma.service=${APP_ALIAS}_pma_service"
+      - 'traefik.http.services.${APP_ALIAS}_pma_service.loadbalancer.server.port=80'
+    profiles:
+      - dev
+    networks:
+      proxy:
+      private:
+        aliases:
+          - ${APP_NETWORK}
+    restart: unless-stopped
