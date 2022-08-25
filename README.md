@@ -1,11 +1,10 @@
 # Docker Compose Project
 
-- [Docker Compose Project](#docker-compose-project)
-    - [Features](#features)
-    - [Folder structure](#folder-structure)
-    - [Example services](#example-services)
-    - [Documentation](#documentation)
-    - [TODO](#todo)
+1. [Features](#features)
+2. [Folder structure](#folder-structure)
+3. [Example services](#example-services)
+4. [Documentation](#documentation)
+5. [TODO](#todo)
 
 This template helps managing complex docker compose base projects.
 
